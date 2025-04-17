@@ -6,6 +6,9 @@ class CardModel {
       orderBy: {
         createdAt: "desc",
       },
+      include: {
+        cards: true
+      }
     });
 
     console.log(collections);
@@ -16,7 +19,7 @@ class CardModel {
   async findById(id) {
     const collection = await prisma.collection.findUnique({
       where: {
-        id: Number(id),
+        id: Number(parseInt(id)),
       },
     });
 
@@ -27,14 +30,12 @@ class CardModel {
     name,
     description = null,
     releaseYear,
-    cards = null
   ) {
     const newCollection = await prisma.collection.create({
       data: {
         name,
         description,
         releaseYear,
-        cards
       },
     });
 
@@ -42,11 +43,12 @@ class CardModel {
   }
 
   async update(
+    id,
     name,
     description,
     releaseYear,
-    cards
   ) {
+
     const collection = await this.findById(id);
 
     if (!collection) {
@@ -55,16 +57,13 @@ class CardModel {
 
     const data = {};
     if (name !== undefined) {
-      data.title = title;
+      data.name = name;
     }
     if (description !== undefined) {
       data.description = description;
     }
     if (releaseYear !== undefined) {
       data.releaseYear = releaseYear;
-    }
-    if (cards !== undefined) {
-      data.cards = cards;
     }
 
     const collectionUpdated = await prisma.collection.update({

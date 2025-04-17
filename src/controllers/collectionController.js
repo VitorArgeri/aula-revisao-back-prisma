@@ -34,7 +34,6 @@ class CollectionController {
         name,
         description = null,
         releaseYear,
-        cards = null
       } = req.body;
 
       if (
@@ -50,7 +49,6 @@ class CollectionController {
         name,
         description,
         releaseYear,
-        cards
       );
 
       if (!newCollection) {
@@ -71,14 +69,13 @@ class CollectionController {
         name,
         description,
         releaseYear,
-        cards
       } = req.body;
 
       const updatedCollection = await CollectionModel.update(
+        id,
         name,
         description,
         releaseYear,
-        cards
       );
 
       if (!updatedCollection) {

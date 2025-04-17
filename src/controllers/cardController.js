@@ -80,6 +80,7 @@ class CardController {
       } = req.body;
 
       const updatedCard = await CardModel.update(
+        id,
         name,
         rarity,
         attackPoints,

@@ -44,6 +44,7 @@ class CardModel {
   }
 
   async update(
+    id,
     name,
     rarity,
     attackPoints,
@@ -58,7 +59,7 @@ class CardModel {
 
     const data = {};
     if (name !== undefined) {
-      data.title = title;
+      data.name = name;
     }
     if (rarity !== undefined) {
       data.rarity = rarity;
