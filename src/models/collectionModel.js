@@ -1,6 +1,6 @@
 import prisma from "../../prisma/prisma.js";
 
-class CardModel {
+class CollectionModel {
   async findAll() {
     const collections = await prisma.collection.findMany({
       orderBy: {
@@ -21,6 +21,9 @@ class CardModel {
       where: {
         id: Number(parseInt(id)),
       },
+      include: {
+        cards: true
+      }
     });
 
     return collection;
@@ -93,4 +96,4 @@ class CardModel {
   }
 }
 
-export default new CardModel();
+export default new CollectionModel();

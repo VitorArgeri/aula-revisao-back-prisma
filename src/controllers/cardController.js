@@ -35,14 +35,16 @@ class CardController {
         rarity,
         attackPoints,
         defensePoints,
-        imageUrl = null
+        imageUrl = null,
+        collectionId
       } = req.body;
 
       if (
         !name ||
         !rarity ||
         !attackPoints ||
-        !defensePoints
+        !defensePoints ||
+        !collectionId
       ) {
         return res
           .status(400)
@@ -54,7 +56,8 @@ class CardController {
         rarity,
         attackPoints,
         defensePoints,
-        imageUrl
+        imageUrl,
+        collectionId
       );
 
       if (!newCard) {
@@ -76,7 +79,8 @@ class CardController {
         rarity,
         attackPoints,
         defensePoints,
-        imageUrl
+        imageUrl,
+        collectionId
       } = req.body;
 
       const updatedCard = await CardModel.update(
@@ -85,7 +89,8 @@ class CardController {
         rarity,
         attackPoints,
         defensePoints,
-        imageUrl
+        imageUrl,
+        collectionId
       );
 
       if (!updatedCard) {

@@ -6,6 +6,9 @@ class CardModel {
       orderBy: {
         createdAt: "desc",
       },
+      include: {
+        collection: true
+      }
     });
 
     console.log(cards);
@@ -18,6 +21,9 @@ class CardModel {
       where: {
         id: Number(id),
       },
+      include: {
+        collection: true,
+      }
     });
 
     return card;
@@ -28,7 +34,9 @@ class CardModel {
     rarity,
     attackPoints,
     defensePoints,
-    imageUrl = null
+    imageUrl = null,
+    collectionId,
+
   ) {
     const newCard = await prisma.card.create({
       data: {
@@ -36,7 +44,8 @@ class CardModel {
         rarity,
         attackPoints,
         defensePoints,
-        imageUrl
+        imageUrl,
+        collectionId
       },
     });
 
@@ -49,7 +58,8 @@ class CardModel {
     rarity,
     attackPoints,
     defensePoints,
-    imageUrl
+    imageUrl,
+    collectionId,
   ) {
     const card = await this.findById(id);
 
@@ -72,6 +82,9 @@ class CardModel {
     }
     if (imageUrl !== undefined) {
       data.imageUrl = imageUrl;
+    }
+    if (collectionId !== undefined) {
+      data.collectionId = collectionId;
     }
 
     const cardUpdated = await prisma.card.update({
