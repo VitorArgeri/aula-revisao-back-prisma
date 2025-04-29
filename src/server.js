@@ -2,9 +2,7 @@ import express from "express";
 import { config } from "dotenv";
 import cors from "cors"; // Importa o middleware CORS
 
-import collectionsRouter from "./routes/collectionRoutes.js";
-import cardsRouter from "./routes/cardRoutes.js";
-import authRouter from "./routes/authRoutes.js";
+import router from "./routes/index.routes.js"
 
 config(); // Carrega variáveis de ambiente do arquivo .env
 const port = process.env.PORT || 4001; // Define a porta do servidor
@@ -15,9 +13,7 @@ app.use(cors()); // Habilita CORS para todas as rotas
 
 app.use(express.json()); // Parse de JSON
 
-app.use("/collections", collectionsRouter);
-app.use("/cards", cardsRouter);
-app.use("/auth", authRouter);
+app.use("/", router);
 
 // Rota base para verificar se o servidor está rodando
 app.get("/", (req, res) => {
