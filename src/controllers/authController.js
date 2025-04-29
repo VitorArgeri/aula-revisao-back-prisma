@@ -1,5 +1,5 @@
-import userModel from '../models/userModel.js';
-
+import UserModel from '../models/userModel.js';
+import bcrypt from "bcryptjs";
 class AuthController {
     async getAllUsers(req, res) {
         try {
@@ -22,7 +22,7 @@ class AuthController {
             }
 
             // Verifica se o usuário já existe
-            const userExists = await userModel.findByEmail(email);
+            const userExists = await UserModel.findByEmail(email);
             if (userExists) {
                 return res.status(400).json({ message: "Este email já está em uso!" });
             }
@@ -38,7 +38,7 @@ class AuthController {
             }
 
             // Criar usuário
-            const user = await userModel.create(data);
+            const user = await UserModel.create(data);
 
             return res.status(201).json({
                 message: "Usuário criado com sucesso!",

@@ -1,5 +1,4 @@
 import prisma from "../../prisma/prisma.js";
-import bcrypt from "bcryptjs";
 
 class UserModel {
     async findAll() {
