@@ -23,7 +23,7 @@ const authMiddleware = (req, res, next) => {
         }
         
         req.userId = decoded.id
-        return next
+        return next()
     })
 }
 
