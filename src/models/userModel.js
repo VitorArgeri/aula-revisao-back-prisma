@@ -1,4 +1,5 @@
 import prisma from "../../prisma/prisma.js";
+import bcrypt from "bcryptjs";
 
 class UserModel {
     async findAll() {
@@ -11,6 +12,17 @@ class UserModel {
         const user = await prisma.user.findUnique({
             where: {
                 id: Number(id)
+            }
+        });
+
+        return user;
+    }
+
+    // Obter um usuário pelo email
+    async findByEmail(email) {
+        const user = await prisma.user.findUnique({
+            where: {
+                email
             }
         });
 
